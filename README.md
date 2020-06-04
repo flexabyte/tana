@@ -11,36 +11,36 @@ Currently only dumps JSON to file for specified indices, and supports dumping al
 Use it in your projects:
 
 ```
-    // New Dumper object
-    let created = Dumper::new("https://localhost:9200",
-        "elastic",
-        "changeme");
+// New Dumper object
+let created = Dumper::new("https://localhost:9200",
+    "elastic",
+    "changeme");
 
-    if !created.is_ok() {
-        println!("Unable to create Elasticsearch object.");
-        process::exit(1);
-    }
+if !created.is_ok() {
+    println!("Unable to create Elasticsearch object.");
+    process::exit(1);
+}
 
-    // Get the indices
-    let mut elastic_dumper = created.unwrap();
-    let indices = elastic_dumper.get_indices().await;
+// Get the indices
+let mut elastic_dumper = created.unwrap();
+let indices = elastic_dumper.get_indices().await;
 
-    // Dump an index to disk
-    let mut dumped = elastic_dumper.dump_index("winlogbeat-2020.04.20".to_string()).await;
+// Dump an index to disk
+let mut dumped = elastic_dumper.dump_index("winlogbeat-2020.04.20".to_string()).await;
+
+if !dumped.is_ok() {
+    println!("Unable to dump elasticsearch index.");
+    process::exit(1);
+}
+
+// Dump all indices to disk
+for index in indices {
+    dumped = elastic_dumper.dump_index(index).await;
 
     if !dumped.is_ok() {
         println!("Unable to dump elasticsearch index.");
-        process::exit(1);
     }
-
-    // Dump all indices to disk
-    for index in indices {
-        dumped = elastic_dumper.dump_index(index).await;
-
-        if !dumped.is_ok() {
-            println!("Unable to dump elasticsearch index.");
-        }
-    }
+}
 
 ```
 
