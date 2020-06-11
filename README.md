@@ -10,7 +10,7 @@ Currently only dumps JSON to file for specified indices, and supports dumping al
 
 Use it in your projects:
 
-```
+```rust
 // New Dumper object
 let created = Dumper::new("https://localhost:9200",
     "elastic",
@@ -46,7 +46,7 @@ for index in indices {
 
 Or just use the command line tool:
 
-```
+```bash
 USAGE:
     tana [FLAGS] [OPTIONS]
 
