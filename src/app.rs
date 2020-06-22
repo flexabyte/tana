@@ -1,4 +1,4 @@
-use clap::{Arg, App, ArgMatches};
+use clap::{App, Arg, ArgMatches};
 
 pub fn parse_args() -> ArgMatches<'static> {
     App::new("TANA - the Elasticsearch Data Cruncher")
