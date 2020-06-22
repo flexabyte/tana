@@ -46,8 +46,6 @@ impl Dumper {
         let creds = Credentials{username: username.to_string(), 
             password: password.to_string()};
 
-        println!("Got creds: {}:{}, host: {}", &username, &password, &url);
-
         Ok(Dumper{client: client, url: url.to_string(), creds: creds, bucket: None})
     }
 
